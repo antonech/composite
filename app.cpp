@@ -54,6 +54,6 @@ void App::run() {
     }
 
     pattern::DotFilesNotation dot;
-    dot.add(new pattern::FileHandler (m_filename));
-    dot.show();
+    dot.add(new pattern::FileHandler(m_filename));
+    std::cout << dot;
 }
