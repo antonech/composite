@@ -43,7 +43,7 @@ namespace pattern {
         void add(ICompBase*);
 
     private:
-        std::list<std::unique_ptr<ICompBase>> children;
+        std::list<std::shared_ptr<ICompBase>> children;
 
     };
 
