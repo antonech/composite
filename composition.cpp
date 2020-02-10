@@ -32,7 +32,13 @@ namespace pattern {
             str << *f ;
         }
 
-        out << str.str();
+        while( std::getline(inStream, line) ) {
+            numbering_list(out, line);
+        }
+    }
+
+    void DotFilesNotation::numbering_list(std::ostream &out, const std::string &line) {
+        size_t pos = line.find_first_not_of(" \t");
     }
 }
 

@@ -42,7 +42,9 @@ namespace pattern {
 
         void add(ICompBase*);
 
+
     private:
+        void numbering_list(std::ostream &out=std::cout, const std::string &line);
         std::list<std::shared_ptr<ICompBase>> children;
 
     };
