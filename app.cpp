@@ -53,7 +53,7 @@ void App::run() {
         throw std::logic_error("Invalid usage");
     }
 
-    pattern::FileHandler reader(m_filename);
-
-    reader.show();
+    pattern::DotFilesNotation dot;
+    dot.add(new pattern::FileHandler (m_filename));
+    dot.show();
 }
