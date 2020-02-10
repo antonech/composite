@@ -11,7 +11,7 @@ namespace pattern {
 
     class ICompBase {
     public:
-        virtual void show(std::ostream &out=std::cout)= 0;
+        virtual void show(std::ostream &out=std::cout) = 0;
 
         // Default constructor
         ICompBase() = default;
@@ -21,9 +21,6 @@ namespace pattern {
         ICompBase(const ICompBase &) = delete;
 
         ICompBase &operator=(const ICompBase &) = delete;
-
-    protected:
-        std::string m_output;
     };
 
     class FileHandler : public ICompBase {
@@ -33,6 +30,9 @@ namespace pattern {
         void show(std::ostream &out=std::cout) override;
 
         ~FileHandler() override = default;
+
+    private:
+        std::string m_output;
     };
 
     class DotFilesNotation: public ICompBase {
@@ -43,6 +43,7 @@ namespace pattern {
 
     private:
         std::list<std::unique_ptr<ICompBase>> children;
+        
     };
 
 }
