@@ -3,7 +3,6 @@
 //
 #include "composition.h"
 #include <iostream>
-#include <fstream>
 #include <sstream>
 
 namespace pattern {
