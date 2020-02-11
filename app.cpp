@@ -33,17 +33,24 @@ void App::config(int argc, char *argv[]) {
 void App::is_valid_file() {
     auto path = fs::path(m_filename);
 
+    std::ostringstream msg_stream;
+    bool error = false;
     if (fs::is_directory(path)) {
-        throw std::runtime_error("It is a directory.");
-
+        error = true;
+        msg_stream << path.filename() << ": is a directory.";
     } else if (!fs::exists(path)) {
-        throw std::runtime_error("The file not exists.");
-
+        error = true;
+        msg_stream << path.filename() << ": file not exists.";
     } else if (fs::file_size(path) > pattern::MAX_FILE_SIZE) {
-        throw std::runtime_error("The file is too big.");
-
+        error = true;
+        msg_stream << path.filename() << ": file is too big, maximum size is " << pattern::MAX_FILE_SIZE / 1024 << " Kb.";
     } else if (fs::is_empty(path)) {
-        throw std::runtime_error("The file is empty.");
+        error = true;
+        msg_stream << path.filename() << ": file is empty.";
+    }
+
+    if (error) {
+        throw std::runtime_error(msg_stream.str());
     }
 }
 
