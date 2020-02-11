@@ -40,7 +40,7 @@ namespace pattern {
         void add(ICompBase*);
 
     private:
-        std::list<std::shared_ptr<ICompBase>> children;
+        std::list<std::shared_ptr<ICompBase>> m_children;
 
     };
 

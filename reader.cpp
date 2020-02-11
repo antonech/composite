@@ -47,10 +47,14 @@ namespace pattern {
         for (auto &i : dot.dotted_numbers) {
             stream << i << '.';
         }
+
+        return stream;
     }
 
     std::ostream& operator<< (std::ostream& stream, ICompBase& base) {
         base.show(stream);
+
+        return stream;
     }
 
    FileHandler::FileHandler(const std::string &filename) {
@@ -72,7 +76,7 @@ namespace pattern {
      * Composite, add leaf
      *********************************************/
     void DottedFileHandler::add(ICompBase *base) {
-        children.emplace_back(base);
+        m_children.emplace_back(base);
     }
 
     /***********************************************
@@ -81,7 +85,7 @@ namespace pattern {
     void DottedFileHandler::show(std::ostream &out) {
         std::stringstream ss;
 
-        for (auto &f: children) {
+        for (auto &f: m_children) {
             f->show(ss);
         }
 
