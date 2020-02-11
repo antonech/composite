@@ -10,5 +10,4 @@ cd "$PROJ_PATH/build"
 echo "Cmake configuration"
 cmake -DCMAKE_BUILD_TYPE=Release ..
 echo "Compilation"
-make -j6
-mv composite ../
+make -j3

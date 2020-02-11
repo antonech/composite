@@ -7,6 +7,10 @@
 #include <vector>
 
 namespace pattern {
+
+    /***********************************************
+     * Helper struct to store and manipulate dot notation
+     * ********************************************/
     struct DottedNumber {
         // store dotted numbers
         uint root = 0;
@@ -56,14 +60,24 @@ namespace pattern {
         m_output.assign((std::istreambuf_iterator<char>(ifs)),std::istreambuf_iterator<char>());
     }
 
+    /***********************************************
+     * Print file content to the stream
+     **********************************************/
     void FileHandler::show(std::ostream &out) {
         out << m_output;
     }
 
+
+    /**********************************************
+     * Composite, add leaf
+     *********************************************/
     void DottedFileHandler::add(ICompBase *base) {
         children.emplace_back(base);
     }
 
+    /***********************************************
+    * Composite, print file content to the stream
+    **********************************************/
     void DottedFileHandler::show(std::ostream &out) {
         std::stringstream ss;
 
@@ -73,6 +87,7 @@ namespace pattern {
 
         DottedNumber dotted;
         std::string line;
+
         while ( std::getline(ss, line) ) {
 
             size_t pos = line.find_first_not_of(" \t");
