@@ -7,6 +7,44 @@
 #include <vector>
 
 namespace pattern {
+    struct DottedNumber {
+        // store dotted numbers
+        uint root = 0;
+        std::vector<uint> dotted_numbers;
+
+        void set(const size_t &pos) {
+
+            size_t seq = dotted_numbers.size();
+            if (pos == 0) {
+                dotted_numbers.clear();
+                ++root;
+            } else if (seq < pos) {
+                if (!root)
+                    root = 1;
+
+                dotted_numbers.insert(dotted_numbers.end(), pos - seq , 1);
+
+            } else {
+                if (!root)
+                    root = 1;
+
+                while (dotted_numbers.size() > pos ) {
+                    dotted_numbers.pop_back();
+                }
+
+                ++dotted_numbers[pos - 1];
+            }
+        }
+    };
+
+    std::ostream& operator<< (std::ostream& stream, DottedNumber& dot) {
+        stream << dot.root << ".";
+
+        for (auto &i : dot.dotted_numbers) {
+            stream << i << '.';
+        }
+    }
+
     std::ostream& operator<< (std::ostream& stream, ICompBase& base) {
         base.show(stream);
     }
@@ -33,12 +71,8 @@ namespace pattern {
             f->show(ss);
         }
 
+        DottedNumber dotted;
         std::string line;
-
-        // store dotted numbers
-        uint root = 0;
-        std::vector<uint> dotted_numbers;
-
         while ( std::getline(ss, line) ) {
 
             size_t pos = line.find_first_not_of(" \t");
@@ -46,33 +80,9 @@ namespace pattern {
                 pos = line.length();
             }
 
-            size_t seq = dotted_numbers.size();
-            if (pos == 0) {
-                dotted_numbers.clear();
-                ++root;
-            } else if (seq < pos) {
-                if (!root)
-                    root = 1;
+            dotted.set(pos);
 
-                dotted_numbers.insert(dotted_numbers.end(), pos - seq , 1);
-
-            } else {
-                if (!root)
-                    root = 1;
-
-                while (dotted_numbers.size() > pos ) {
-                    dotted_numbers.pop_back();
-                }
-
-                ++dotted_numbers[pos - 1];
-            }
-
-            out << std::string(pos, ' ') << root << ".";
-            for (auto &i : dotted_numbers) {
-                out << i << '.';
-            }
-
-            out << " " << line.substr(pos) << std::endl;
+            out << std::string(pos, ' ') << dotted << " " << line.substr(pos) << std::endl;
         }
     }
 
