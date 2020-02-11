@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
         App app(argc, argv);
         app.run();
     } catch(std::exception &e) {
-        std::cerr << e.what();
+        std::cerr << e.what() << std::endl;
 
         return 1;
     }

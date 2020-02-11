@@ -1,10 +1,8 @@
 //
 // Created by anton on 9.2.2020.
 //
-
 #ifndef PATTERNS_APP_H
 #define PATTERNS_APP_H
-
 #include <string>
 
 class App {

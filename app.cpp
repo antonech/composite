@@ -2,7 +2,7 @@
 // Created by anton on 9.2.2020.
 //
 #include "app.h"
-#include "composition.h"
+#include "reader.h"
 #include <iostream>
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
@@ -34,16 +34,16 @@ void App::is_valid_file() {
     auto path = fs::path(m_filename);
 
     if (fs::is_directory(path)) {
-        throw std::runtime_error("It's a directory");
+        throw std::runtime_error("It is a directory.");
 
     } else if (!fs::exists(path)) {
-        throw std::runtime_error("File not exists");
+        throw std::runtime_error("The file not exists.");
 
     } else if (fs::file_size(path) > pattern::MAX_FILE_SIZE) {
-        throw std::runtime_error("File is too big");
+        throw std::runtime_error("The file is too big.");
 
     } else if (fs::is_empty(path)) {
-        throw std::runtime_error("File is empty");
+        throw std::runtime_error("The file is empty.");
     }
 }
 
@@ -53,7 +53,8 @@ void App::run() {
         throw std::logic_error("Invalid usage");
     }
 
-    pattern::DotFilesNotation dot;
+    pattern::DottedFileHandler dot;
+
     dot.add(new pattern::FileHandler(m_filename));
     std::cout << dot;
 }
